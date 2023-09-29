@@ -20,9 +20,64 @@ function drawRandomClouds() {
         drawCloud(ctx, Math.random() * canvas.width, Math.random() * canvas.height, Math.random() * 50 + 20);
     }
 }
+function drawStickman(ctx, x, y) {
+  ctx.fillStyle = '#000';
+  ctx.fillRect(x, y, 20, 50);
+
+  ctx.beginPath();
+  ctx.arc(x + 10, y + 10, 5, 0, 2 * Math.PI);
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.moveTo(x, y + 20);
+  ctx.lineTo(x - 10, y + 30);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(x + 20, y + 20);
+  ctx.lineTo(x + 30, y + 30);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(x, y + 40);
+  ctx.lineTo(x - 10, y + 50);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(x + 20, y + 40);
+  ctx.lineTo(x + 30, y + 50);
+  ctx.stroke();
+}
+}
+
+// Function to generate a random position for the stickman
+function generateRandomStickmanPosition() {
+    const x = Math.random() * canvas.width;
+    const y = Math.random() * canvas.height;
+    return { x, y };
+}
+
+// Initialize the canvas and draw random clouds
 initializeCanvas();
 drawRandomClouds();
+
+// Generate and draw multiple stickmen with random positions
+const numberOfStickmen = 15; // You can adjust the number of stickmen
+const stickmen = [];
+
+for (let i = 0; i < numberOfStickmen; i++) {
+    const position = generateRandomStickmanPosition();
+    stickmen.push(position);
+    drawStickman(ctx, position.x, position.y);
+}
+
+// Listen for window resize event and redraw clouds
 window.addEventListener('resize', () => {
     initializeCanvas();
     drawRandomClouds();
+
+    // Redraw all stickmen at random positions
+    stickmen.forEach((position) => {
+        drawStickman(ctx, position.x, position.y);
+    });
 });
