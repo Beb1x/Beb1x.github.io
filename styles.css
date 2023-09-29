@@ -7,7 +7,7 @@ body {
 .stickman {
     width: 66px;
     height: 143px;
-    background: url('image.png') no-repeat;
+    background: url('image1.png') no-repeat;
     animation: fall 5s linear infinite;
     position: absolute;
 }
