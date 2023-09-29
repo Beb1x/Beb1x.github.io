@@ -6,7 +6,7 @@ class Cloud {
     this.x = x;
     this.y = y;
     this.size = size;
-    this.velocity = 0.5;
+    this.velocity = 0.05;
   }
   draw(ctx) {
     ctx.fillStyle = '#FFFFFF';
