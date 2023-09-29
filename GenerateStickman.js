@@ -1,4 +1,3 @@
-// JavaScript code to create and position stickmen
 for (let i = 0; i < numberOfStickmen; i++) {
     const stickman = document.createElement('div');
     stickman.className = 'stickman';
