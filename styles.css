@@ -1,28 +1,28 @@
 body {
-    margin: 0;
-    overflow: hidden;
-    background-color: #fff;
+  margin: 0;
+  overflow: hidden;
+  background-color: #89cff0;
 }
 .stickman {
-    width: 66px;
-    height: 143px;
-    background: url('image.png') no-repeat;
-    animation: fall 5s linear infinite, rotate 5s linear infinite;
-    position: absolute;
+  width: 66px;
+  height: 143px;
+  background: url('image.png') no-repeat;
+  animation: fall 5s linear infinite, rotate 5s linear infinite;
+  position: absolute;
 }
 @keyframes fall {
-    0% {
-        transform: translateY(0);
-    }
-    100% {
-        transform: translateY(100vh);
-    }
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
 }
 @keyframes rotate {
-    0% {
-        transform: translateY(0) rotate(0deg);
-    }
-    100% {
-        transform: translateY(100vh) rotate(360deg);
-    }
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+  }
 }
