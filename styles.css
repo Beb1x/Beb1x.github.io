@@ -1,13 +1,13 @@
 body {
     margin: 0;
     overflow: hidden;
-    background-color: #fff; /* Customize your background color here */
+    background-color: #fff;
 }
 
 .stickman {
     width: 66px;
     height: 143px;
-    background: url('stickman.png') no-repeat;
+    background: url('image.png') no-repeat;
     animation: fall 5s linear infinite;
     position: absolute;
 }
