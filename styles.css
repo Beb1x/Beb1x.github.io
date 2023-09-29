@@ -3,20 +3,26 @@ body {
     overflow: hidden;
     background-color: #fff;
 }
-
 .stickman {
     width: 66px;
     height: 143px;
     background: url('image.png') no-repeat;
-    animation: fall 5s linear infinite;
+    animation: fall 5s linear infinite, rotate 5s linear infinite;
     position: absolute;
 }
-
 @keyframes fall {
     0% {
         transform: translateY(0);
     }
     100% {
         transform: translateY(100vh);
+    }
+}
+@keyframes rotate {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
     }
 }
