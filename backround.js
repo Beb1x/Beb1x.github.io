@@ -41,10 +41,10 @@ function draw() {
 function generateRandomCloud() {
   const x = Math.random() * canvas.width;
   const y = Math.random() * canvas.height;
-  const size = Math.random() * 50 + 20;
+  const size = Math.random() * 45 + 20;
   return new Cloud(x, y, size);
 }
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < 20; i++) {
   clouds.push(generateRandomCloud());
 }
 initializeCanvas();
