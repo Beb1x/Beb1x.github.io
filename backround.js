@@ -10,8 +10,8 @@ function initializeCanvas() {
   ctx.fillStyle = '#00FFFF';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  for (let i = 0; i < 15; i++) {
-    createCharacter();
+for (let i = 0; i < numberOfCharacters; i++) {
+  createCharacter();
   }
 }
 
