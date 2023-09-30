@@ -10,6 +10,7 @@ body {
   background-image: url("NuRadeMaDovetit.png");
   animation: movement 10s linear infinite;
 }
+
 @keyframes movement {
   0% {
     background-position: 0px 0px;
@@ -18,13 +19,23 @@ body {
     background-position: 560px 0px;
   }
 }
-.stickman {
+
+.stickman,
+.spooderman { 
   width: 66px;
   height: 143px;
-  background: url('image.png') no-repeat;
   animation: fall 5s linear infinite, rotate 5s linear infinite;
   position: absolute;
 }
+
+.stickman {
+  background: url('image.png') no-repeat;
+}
+
+.spooderman {
+  background: url('SpooderMan.png') no-repeat;
+}
+
 @keyframes fall {
   0% {
     transform: translateY(0);
@@ -33,6 +44,7 @@ body {
     transform: translateY(100vh);
   }
 }
+
 @keyframes rotate {
   0% {
     transform: translateY(0) rotate(0deg);
