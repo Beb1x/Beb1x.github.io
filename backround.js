@@ -10,8 +10,9 @@ function initializeCanvas() {
   ctx.fillStyle = '#00FFFF';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-for (let i = 0; i < numberOfCharacters; i++) {
-  createCharacter();
+  const numberOfCharacters = getRandomNumber(5, 25);
+  for (let i = 0; i < numberOfCharacters; i++) {
+    createCharacter();
   }
 }
 
@@ -19,12 +20,9 @@ function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   for (const character of characters) {
     changeCharacterDirection(character);
-    if (character.offsetLeft < 0.8 || character.offsetLeft > canvas.width) {
+    if (character.offsetTop > canvas.height) {
       removeCharacter(character);
     }
-  }
-  if (characters.length === 0) {
-    resetAnimation();
   }
   requestAnimationFrame(draw);
 }
@@ -37,24 +35,14 @@ function createCharacter() {
   const character = document.createElement('div');
   const isSpooderman = Math.random() < 0.5;
   character.classList.add(isSpooderman ? 'spooderman' : 'stickman');
-  character.style.left = getRandomNumber(0, window.innerWidth) + 'px';
+  character.style.left = getRandomNumber(0, window.innerWidth - 66) + 'px'; 
+  character.style.top = '0'; // Start at the top
   document.getElementById('characters-container').appendChild(character);
-  character.style.animationDelay = `${Math.random() * 5}s`;
   characters.push(character);
 }
 
-const numberOfCharacters = getRandomNumber(2, 50);
-for (let i = 0; i < numberOfCharacters; i++) {
-  createCharacter();
-}
-
 function changeCharacterDirection(character) {
-  const randomDirection = Math.random();
-  if (randomDirection < 3) {
-    character.style.left = `${character.offsetLeft + 10}px`;
-  } else {
-    character.style.left = `${character.offsetLeft - 10}px`;
-  }
+  character.style.top = `${character.offsetTop + getRandomNumber(1, 5)}px`; 
 }
 
 function removeCharacter(character) {
@@ -65,6 +53,7 @@ function resetAnimation() {
   while (characters.length > 0) {
     removeCharacter(characters[0]);
   }
+  const numberOfCharacters = getRandomNumber(5, 25);
   for (let i = 0; i < numberOfCharacters; i++) {
     createCharacter();
   }
