@@ -29,6 +29,10 @@ function initializeCanvas() {
   canvas.height = window.innerHeight;
   ctx.fillStyle = '#00FFFF';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  for (let i = 0; i < 15; i++) {
+    createStickman();
+  }
 }
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -39,10 +43,10 @@ function draw() {
   requestAnimationFrame(draw);
 }
 function generateRandomCloud() {
-  const x = Math.random() * canvas.width;
-  const y = Math.random() * canvas.height;
-  const size = Math.random() * 45 + 20;
-  return new Cloud(x, y, size);
+ const x = Math.random() * (canvas.width - 100) + 50;
+ const y = Math.random() * canvas.height;
+ const size = Math.random() * 45 + 20;
+ return new Cloud(x, y, size);
 }
 for (let i = 0; i < 20; i++) {
   clouds.push(generateRandomCloud());
@@ -64,13 +68,13 @@ function createStickman() {
   stickman.style.animationDelay = `${Math.random() * 5}s`;
   stickmen.push(stickman);
 }
-const numberOfStickmen = getRandomNumber(5, 20);
+const numberOfStickmen = getRandomNumber(1, 30);
 for (let i = 0; i < numberOfStickmen; i++) {
     createStickman();
 }
 function changeStickmanDirection(stickman) {
   const randomDirection = Math.random();
-  if (randomDirection < 0.5) {
+  if (randomDirection < 1) {
     stickman.style.left = `${stickman.offsetLeft + 10}px`;
   } else {
     stickman.style.left = `${stickman.offsetLeft - 10}px`;
@@ -84,7 +88,7 @@ function draw() {
   }
   for (const stickman of stickmen) {
     changeStickmanDirection(stickman);
-    if (stickman.offsetLeft < 0 || stickman.offsetLeft > canvas.width) {
+    if (stickman.offsetLeft < 0.8 || stickman.offsetLeft > canvas.width) {
       removeStickman(stickman);
     }
   }
