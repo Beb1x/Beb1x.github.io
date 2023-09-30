@@ -8,7 +8,7 @@ body {
   font-family: system-ui, calibri, serif;
   background-repeat: repeat-x;
   background-image: url("NuRadeMaDovetit.png");
-  animation: movement 10s linear infinite;
+  animation: movement 10s linear;
 }
 
 @keyframes movement {
