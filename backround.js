@@ -55,11 +55,14 @@ window.addEventListener('resize', () => {
 function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+const stickmen = [];
 function createStickman() {
-    const stickman = document.createElement('div');
-    stickman.classList.add('stickman');
-    stickman.style.left = getRandomNumber(0, window.innerWidth) + 'px';
-    document.getElementById('stickmen-container').appendChild(stickman);
+  const stickman = document.createElement('div');
+  stickman.classList.add('stickman');
+  stickman.style.left = getRandomNumber(0, window.innerWidth) + 'px';
+  document.getElementById('stickmen-container').appendChild(stickman);
+  stickman.style.animationDelay = `${Math.random() * 5}s`;
+  stickmen.push(stickman);
 }
 const numberOfStickmen = getRandomNumber(5, 20);
 for (let i = 0; i < numberOfStickmen; i++) {
