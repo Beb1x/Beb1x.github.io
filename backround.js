@@ -88,17 +88,8 @@ function draw() {
       removeStickman(stickman);
     }
   }
-  if (stickmen.length < 5) {
-    generateNewStickman();
-  }
-  requestAnimationFrame(draw);
-}
-  for (const cloud of clouds) {
-    cloud.update();
-    cloud.draw(ctx);
-  }
-  for (const stickman of stickmen) {
-    changeStickmanDirection(stickman);
+  if (stickmen.length === 0) {
+    resetAnimation();
   }
   requestAnimationFrame(draw);
 }
@@ -110,4 +101,12 @@ function generateNewStickman() {
   stickman.classList.add('stickman');
   stickman.style.left = getRandomNumber(0, window.innerWidth) + 'px';
   document.getElementById('stickmen-container').appendChild(stickman);
+}
+function resetAnimation() {
+  while (stickmen.length > 0) {
+    removeStickman(stickmen[0]);
+  }
+  for (let i = 0; i < numberOfStickmen; i++) {
+    createStickman();
+  }
 }
