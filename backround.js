@@ -65,3 +65,46 @@ const numberOfStickmen = getRandomNumber(5, 20);
 for (let i = 0; i < numberOfStickmen; i++) {
     createStickman();
 }
+function changeStickmanDirection(stickman) {
+  const randomDirection = Math.random();
+  if (randomDirection < 0.5) {
+    stickman.style.left = `${stickman.offsetLeft + 10}px`;
+  } else {
+    stickman.style.left = `${stickman.offsetLeft - 10}px`;
+  }
+}
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (const cloud of clouds) {
+    cloud.update();
+    cloud.draw(ctx);
+  }
+  for (const stickman of stickmen) {
+    changeStickmanDirection(stickman);
+    if (stickman.offsetLeft < 0 || stickman.offsetLeft > canvas.width) {
+      removeStickman(stickman);
+    }
+  }
+  if (stickmen.length < 5) {
+    generateNewStickman();
+  }
+  requestAnimationFrame(draw);
+}
+  for (const cloud of clouds) {
+    cloud.update();
+    cloud.draw(ctx);
+  }
+  for (const stickman of stickmen) {
+    changeStickmanDirection(stickman);
+  }
+  requestAnimationFrame(draw);
+}
+function removeStickman(stickman) {
+  stickman.parentNode.removeChild(stickman);
+}
+function generateNewStickman() {
+  const stickman = document.createElement('div');
+  stickman.classList.add('stickman');
+  stickman.style.left = getRandomNumber(0, window.innerWidth) + 'px';
+  document.getElementById('stickmen-container').appendChild(stickman);
+}
