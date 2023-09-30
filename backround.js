@@ -2,7 +2,7 @@ const canvas = document.createElement('canvas');
 const ctx = canvas.getContext('2d');
 document.body.appendChild(canvas);
 
-const stickmen = [];
+const characters = [];
 
 function initializeCanvas() {
   canvas.width = window.innerWidth;
@@ -11,19 +11,19 @@ function initializeCanvas() {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   for (let i = 0; i < 15; i++) {
-    createStickman();
+    createCharacter();
   }
 }
 
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  for (const stickman of stickmen) {
-    changeStickmanDirection(stickman);
-    if (stickman.offsetLeft < 0.8 || stickman.offsetLeft > canvas.width) {
-      removeStickman(stickman);
+  for (const character of characters) {
+    changeCharacterDirection(character);
+    if (character.offsetLeft < 0.8 || character.offsetLeft > canvas.width) {
+      removeCharacter(character);
     }
   }
-  if (stickmen.length === 0) {
+  if (characters.length === 0) {
     resetAnimation();
   }
   requestAnimationFrame(draw);
@@ -33,39 +33,40 @@ function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function createStickman() {
-  const stickman = document.createElement('div');
-  stickman.classList.add('stickman');
-  stickman.style.left = getRandomNumber(0, window.innerWidth) + 'px';
-  document.getElementById('stickmen-container').appendChild(stickman);
-  stickman.style.animationDelay = `${Math.random() * 5}s`;
-  stickmen.push(stickman);
+function createCharacter() {
+  const character = document.createElement('div');
+  const isSpooderman = Math.random() < 0.5;
+  character.classList.add(isSpooderman ? 'spooderman' : 'stickman');
+  character.style.left = getRandomNumber(0, window.innerWidth) + 'px';
+  document.getElementById('characters-container').appendChild(character);
+  character.style.animationDelay = `${Math.random() * 5}s`;
+  characters.push(character);
 }
 
-const numberOfStickmen = getRandomNumber(2, 50);
-for (let i = 0; i < numberOfStickmen; i++) {
-  createStickman();
+const numberOfCharacters = getRandomNumber(2, 50);
+for (let i = 0; i < numberOfCharacters; i++) {
+  createCharacter();
 }
 
-function changeStickmanDirection(stickman) {
+function changeCharacterDirection(character) {
   const randomDirection = Math.random();
   if (randomDirection < 3) {
-    stickman.style.left = `${stickman.offsetLeft + 10}px`;
+    character.style.left = `${character.offsetLeft + 10}px`;
   } else {
-    stickman.style.left = `${stickman.offsetLeft - 10}px`;
+    character.style.left = `${character.offsetLeft - 10}px`;
   }
 }
 
-function removeStickman(stickman) {
-  stickman.parentNode.removeChild(stickman);
+function removeCharacter(character) {
+  character.parentNode.removeChild(character);
 }
 
 function resetAnimation() {
-  while (stickmen.length > 0) {
-    removeStickman(stickmen[0]);
+  while (characters.length > 0) {
+    removeCharacter(characters[0]);
   }
-  for (let i = 0; i < numberOfStickmen; i++) {
-    createStickman();
+  for (let i = 0; i < numberOfCharacters; i++) {
+    createCharacter();
   }
 }
 
