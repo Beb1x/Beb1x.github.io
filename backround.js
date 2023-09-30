@@ -1,12 +1,13 @@
 const canvas = document.createElement('canvas');
 const ctx = canvas.getContext('2d');
 document.body.appendChild(canvas);
+
 class Cloud {
-  constructor(x, y, size) {
+  constructor(x, y, size, velocity) {
     this.x = x;
     this.y = y;
     this.size = size;
-    this.velocity = 0.10;
+    this.velocity = velocity;
   }
   draw(ctx) {
     ctx.fillStyle = '#FFFFFF';
@@ -18,12 +19,16 @@ class Cloud {
   }
   update() {
     this.x += this.velocity;
-    if (this.y < 0) {
-      this.y = canvas.height;
+    if (this.y > canvas.height) {
+      this.y = -this.size;
+      this.x = Math.random() * (canvas.width - 100) + 50;
     }
   }
 }
+
 const clouds = [];
+const stickmen = [];
+
 function initializeCanvas() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
@@ -34,52 +39,7 @@ function initializeCanvas() {
     createStickman();
   }
 }
-function draw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  for (const cloud of clouds) {
-    cloud.update();
-    cloud.draw(ctx);
-  }
-  requestAnimationFrame(draw);
-}
-function generateRandomCloud() {
- const x = Math.random() * (canvas.width - 100) + 50;
- const y = Math.random() * canvas.height;
- const size = Math.random() * 45 + 20;
- return new Cloud(x, y, size);
-}
-for (let i = 0; i < 20; i++) {
-  clouds.push(generateRandomCloud());
-}
-initializeCanvas();
-draw();
-window.addEventListener('resize', () => {
-  initializeCanvas();
-});
-function getRandomNumber(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-const stickmen = [];
-function createStickman() {
-  const stickman = document.createElement('div');
-  stickman.classList.add('stickman');
-  stickman.style.left = getRandomNumber(0, window.innerWidth) + 'px';
-  document.getElementById('stickmen-container').appendChild(stickman);
-  stickman.style.animationDelay = `${Math.random() * 5}s`;
-  stickmen.push(stickman);
-}
-const numberOfStickmen = getRandomNumber(1, 30);
-for (let i = 0; i < numberOfStickmen; i++) {
-    createStickman();
-}
-function changeStickmanDirection(stickman) {
-  const randomDirection = Math.random();
-  if (randomDirection < 1) {
-    stickman.style.left = `${stickman.offsetLeft + 10}px`;
-  } else {
-    stickman.style.left = `${stickman.offsetLeft - 10}px`;
-  }
-}
+
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   for (const cloud of clouds) {
@@ -97,15 +57,58 @@ function draw() {
   }
   requestAnimationFrame(draw);
 }
-function removeStickman(stickman) {
-  stickman.parentNode.removeChild(stickman);
+
+function generateRandomCloud() {
+  const x = Math.random() * (canvas.width - 100) + 50;
+  const y = Math.random() * canvas.height;
+  const size = Math.random() * 45 + 20;
+  const velocity = Math.random() * 0.05 + 0.02;
+  return new Cloud(x, y, size, velocity);
 }
-function generateNewStickman() {
+
+for (let i = 0; i < 30; i++) {
+  const cloud = generateRandomCloud();
+  clouds.push(cloud);
+}
+
+initializeCanvas();
+draw();
+
+window.addEventListener('resize', () => {
+  initializeCanvas();
+});
+
+function getRandomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function createStickman() {
   const stickman = document.createElement('div');
   stickman.classList.add('stickman');
   stickman.style.left = getRandomNumber(0, window.innerWidth) + 'px';
   document.getElementById('stickmen-container').appendChild(stickman);
+  stickman.style.animationDelay = `${Math.random() * 5}s`;
+  stickmen.push(stickman);
 }
+
+const numberOfStickmen = getRandomNumber(2, 50);
+for (let i = 0; i < numberOfStickmen; i++) {
+  createStickman();
+}
+
+function changeStickmanDirection(stickman) {
+  const randomDirection = Math.random();
+  if (randomDirection < 1) {
+    stickman.style.left = `${stickman.offsetLeft + 10}px`;
+  } else {
+    stickman.style.left = `${stickman.offsetLeft - 10}px`;
+  }
+}
+
+function removeStickman(stickman) {
+  stickman.parentNode.removeChild(stickman);
+}
+
 function resetAnimation() {
   while (stickmen.length > 0) {
     removeStickman(stickmen[0]);
