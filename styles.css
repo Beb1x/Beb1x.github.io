@@ -1,7 +1,23 @@
+
 body {
+  display: flex;
+  min-height: 100vh;
   margin: 0;
-  overflow: hidden;
-  background-color: #89cff0;
+  align-items: center;
+  justify-content: center;
+  background-color: #bfdfec;
+  font-family: system-ui, calibri, serif;
+  background-repeat: repeat-x;
+  background-image: url("NuRadeMaDovetit.png");
+  animation: movement 10s linear infinite;
+}
+@keyframes movement {
+  0% {
+    background-position: 0px 0px;
+  }
+  100% {
+    background-position: 560px 0px;
+  }
 }
 .stickman {
   width: 66px;
