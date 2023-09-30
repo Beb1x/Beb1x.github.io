@@ -60,13 +60,13 @@ function draw() {
 
 function generateRandomCloud() {
   const x = Math.random() * (canvas.width - 100) + 50;
-  const y = Math.random() * canvas.height;
+  const y = Math.random() * (canvas.height / 2);
   const size = Math.random() * 45 + 20;
-  const velocity = Math.random() * 0.05 + 0.02;
+  const velocity = Math.random() * 0.1 + 0.05; 
   return new Cloud(x, y, size, velocity);
 }
 
-for (let i = 0; i < 30; i++) {
+for (let i = 0; i < 50; i++) { 
   const cloud = generateRandomCloud();
   clouds.push(cloud);
 }
@@ -98,7 +98,7 @@ for (let i = 0; i < numberOfStickmen; i++) {
 
 function changeStickmanDirection(stickman) {
   const randomDirection = Math.random();
-  if (randomDirection < 1) {
+  if (randomDirection < 3) {
     stickman.style.left = `${stickman.offsetLeft + 10}px`;
   } else {
     stickman.style.left = `${stickman.offsetLeft - 10}px`;
