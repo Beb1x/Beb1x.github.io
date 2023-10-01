@@ -26,6 +26,21 @@ class Cloud {
   }
 }
 
+class Spooderman extends Cloud {
+  constructor(x, y, size, velocity) {
+    super(x, y, size, velocity);
+  }
+
+  draw(ctx) {
+    ctx.fillStyle = '#FFFFFF';
+    ctx.beginPath();
+    ctx.arc(this.x + this.size, this.y + this.size, this.size, 0, 2 * Math.PI);
+    ctx.arc(this.x + this.size * 1.5, this.y + this.size * 0.5, this.size * 0.75, 0, 2 * Math.PI);
+    ctx.arc(this.x + this.size * 2.5, this.y + this.size * 1.5, this.size, 0, 2 * Math.PI);
+    ctx.fill();
+  }
+}
+
 const clouds = [];
 const stickmen = [];
 
@@ -37,6 +52,10 @@ function initializeCanvas() {
 
   for (let i = 0; i < 15; i++) {
     createStickman();
+  }
+  for (let i = 0; i < 5; i++) {
+    const spooderman = new Spooderman(Math.random() * canvas.width, Math.random() * canvas.height, Math.random() * 45 + 20, Math.random() * 0.1 + 0.05);
+    stickmen.push(spooderman);
   }
 }
 
@@ -51,6 +70,10 @@ function draw() {
     if (stickman.offsetLeft < 0.8 || stickman.offsetLeft > canvas.width) {
       removeStickman(stickman);
     }
+  }
+  for (const spooderman of stickmen) {
+    spooderman.update();
+    spooderman.draw(ctx);
   }
   if (stickmen.length === 0) {
     resetAnimation();
