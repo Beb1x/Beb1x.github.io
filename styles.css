@@ -19,6 +19,9 @@ body {
     background-position: 560px 0px;
   }
 }
+#stickmen-container {
+  max-width: 100%;
+}
 
 .stickman,
 .spooderman { 
