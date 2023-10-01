@@ -1,14 +1,14 @@
 body {
   display: flex;
-  min-height: 100vh;
+  min-height: 100%;
   margin: 0;
   align-items: center;
   justify-content: center;
   background-color: #bfdfec;
   font-family: system-ui, calibri, serif;
-  background-repeat: repeat-x;
+  background-repeat: round;
   background-image: url("NuRadeMaDovetit.png");
-  animation: movement 500s linear infinite;
+  animation: 15s linear 1s infinite alternate slidein;
 }
 
 @keyframes movement {
@@ -26,6 +26,7 @@ body {
   height: 143px;
   animation: fall 5s linear infinite, rotate 5s linear infinite;
   position: absolute;
+  top: 1%;
 }
 
 .stickman {
